@@ -2138,6 +2138,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Intercept clicks on images across the whole website
         document.body.addEventListener("click", (e) => {
+            if (!e.target || typeof e.target.closest !== "function") return;
+
             if (e.target.closest('#image-lightbox')) return;
             if (e.target.closest('.lightbox-close')) return;
 
