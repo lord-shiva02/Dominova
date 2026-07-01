@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOMINOVA - Professional IT Services Portfolio</title>
+    <meta name="description" content="DOMINOVA is an MSME-registered IT startup delivering exceptional workshops, guest lectures, and hackathon guidance to colleges across India. Expert-led AI, Python, and Testing training.">
+    <meta name="author" content="DOMINOVA">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="DOMINOVA - Professional IT Services & Training">
+    <meta property="og:description" content="Expert-led workshops, guest lectures, and hackathon guidance for engineering colleges. Specializing in AI, Python, Testing, and more.">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DOMINOVA - IT Training Excellence">
+    <meta name="twitter:description" content="Professional workshops and guidance for engineering students across India">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- OGL CDN -->
+    <script src="assets/ogl.umd.js"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- 3D Perspective Background Grid -->
+    <div class="grid-background-container">
+        <div class="grid-background-3d"></div>
+    </div>
+    
+    <!-- Gradient Blinds Background -->
+    <div id="blinds-background"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="logo-container">
+                    <img src="assets/dominova-logo.png" alt="DOMINOVA Logo" class="hero-logo">
+                </div>
+                <div class="badge">
+                    <span class="badge-text">MSME Registered IT Startup</span>
+                </div>
+                <h1 class="hero-title">
+                    Empowering Students Through<br>
+                    <span id="hero-typing-text" class="highlight"></span>
+                </h1>
+                <p class="hero-subtitle">
+                    Professional workshops, expert-led training, and comprehensive guidance for engineering colleges across India
+                </p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">1200+</span>
+                        <span class="stat-label">Students Trained</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">6+</span>
+                        <span class="stat-label">Major Events</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Expert Trainers</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Satisfaction</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg" id="explore-btn">
+                    Explore Our Work
+                    <i data-lucide="arrow-right" class="btn-icon"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events" id="events-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured <span class="highlight">Events</span></h2>
+                <p class="section-subtitle scrambled-text-line" id="events-subtitle">Showcasing our impact across leading engineering institutions</p>
+            </div>
+            
+            <div class="events-list">
+                <!-- Event 1: NEXORA 2K25 -->
+                <div class="event-card">
+                    <div class="event-info">
+                        <div class="event-badge">AI & Python Workshop at SIMATS</div>
+                        <h3 class="event-title">NEXORA 2K25</h3>
+                        <p class="event-description">A groundbreaking national-level symposium where we conducted comprehensive AI and Python workshops for 800+ students. Students learned to build real mobile apps and websites in just 3 hours using cutting-edge AI tools.</p>
+                        
+                        <div class="event-highlights">
+                            <h4>Key Highlights</h4>
+                            <ul>
+                                <li>800+ students trained (550 in AI, 350 in Python)</li>
+                                <li>Hands-on, interactive sessions with live project building</li>
+                                <li>Students created functional apps and websites using AI in 3 hours</li>
+                                <li>Led by B Deepak (Founder), Manikandan (Infosys), and Gauthaman (CTS)</li>
+                                <li>Overwhelmingly positive student feedback and engagement</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="event-stats">
+                            <div class="event-stat">
+                                <span class="event-stat-value">800+</span>
+                                <span class="event-stat-label">Students</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">3</span>
+                                <span class="event-stat-label">Hours</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">2</span>
+                                <span class="event-stat-label">Topics</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">3</span>
+                                <span class="event-stat-label">Trainers</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-image-gallery">
+                        <div class="event-gallery-item"><img src="assets/nexora-1.jpg" alt="NEXORA 2K25 1" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/nexora-2.jpg" alt="NEXORA 2K25 2" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/nexora-3.jpg" alt="NEXORA 2K25 3" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/nexora-4.jpg" alt="NEXORA 2K25 4" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/nexora-5.jpg" alt="NEXORA 2K25 5" class="event-gallery-img"></div>
+                    </div>
+                </div>
+
+                <!-- Event 2: BI BATTLE -->
+                <div class="event-card">
+                    <div class="event-info">
+                        <div class="event-badge">Power BI Workshop at Sathyabama Institute</div>
+                        <h3 class="event-title">BI BATTLE</h3>
+                        <p class="event-description">On January 29, 2026, Ananya Sanjeev from Deloitte led an intensive Power BI training session at Sathyabama Institute. Students gained hands-on experience building dashboards, mastering data visualization techniques, and competed in an exciting quiz competition. B Deepak, the founder, also delivered career guidance sessions while fun interactive activities kept students fully engaged throughout the day.</p>
+                        
+                        <div class="event-highlights">
+                            <h4>Key Highlights</h4>
+                            <ul>
+                                <li>Hands-on Power BI dashboard building and data visualization</li>
+                                <li>Led by Ananya Sanjeev from Deloitte</li>
+                                <li>Interactive quiz competition among students</li>
+                                <li>Career guidance session by Founder B Deepak</li>
+                                <li>Fun engagement activities to keep energy high</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="event-stats">
+                            <div class="event-stat">
+                                <span class="event-stat-value">200+</span>
+                                <span class="event-stat-label">Students</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">1 Day</span>
+                                <span class="event-stat-label">Duration</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">2</span>
+                                <span class="event-stat-label">Trainers</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">2</span>
+                                <span class="event-stat-label">Dominova Reps</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-image-gallery">
+                        <div class="event-gallery-item"><img src="assets/bi-battle-1.jpg" alt="BI BATTLE 1" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/bi-battle-2.jpg" alt="BI BATTLE 2" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/bi-battle-3.jpg" alt="BI BATTLE 3" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/bi-battle-4.jpg" alt="BI BATTLE 4" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/bi-battle-5.jpg" alt="BI BATTLE 5" class="event-gallery-img"></div>
+                    </div>
+                </div>
+
+                <!-- Event 3: SEC Hackathon Evaluation -->
+                <div class="event-card">
+                    <div class="event-info">
+                        <div class="event-badge">National-Level Project Assessment</div>
+                        <h3 class="event-title">SEC Hackathon Evaluation</h3>
+                        <p class="event-description">Conducted comprehensive evaluation of student hackathon projects at Saveetha Engineering College's national-level competition. Provided expert feedback and guidance to help students refine their innovations.</p>
+                        
+                        <div class="event-highlights">
+                            <h4>Key Highlights</h4>
+                            <ul>
+                                <li>National-level hackathon evaluation panel</li>
+                                <li>Expert team: B Deepak, Manikandan, Gauthaman</li>
+                                <li>Detailed project assessment and technical review</li>
+                                <li>Constructive feedback and mentorship for participants</li>
+                                <li>Recognition of innovative student solutions</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="event-stats">
+                            <div class="event-stat">
+                                <span class="event-stat-value">50+</span>
+                                <span class="event-stat-label">Projects</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">3</span>
+                                <span class="event-stat-label">Evaluators</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">National</span>
+                                <span class="event-stat-label">Level</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">SEC</span>
+                                <span class="event-stat-label">College</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-image-gallery">
+                        <div class="event-gallery-item"><img src="assets/sec-eval-1.jpg" alt="SEC Eval 1" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/sec-eval-2.jpg" alt="SEC Eval 2" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/sec-eval-3.jpg" alt="SEC Eval 3" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/sec-eval-4.jpg" alt="SEC Eval 4" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/sec-eval-5.jpg" alt="SEC Eval 5" class="event-gallery-img"></div>
+                    </div>
+                </div>
+
+                <!-- Event 4: SEC Hackathon Guidance -->
+                <div class="event-card">
+                    <div class="event-info">
+                        <div class="event-badge">Presentation Mentoring Workshop</div>
+                        <h3 class="event-title">SEC Hackathon Guidance</h3>
+                        <p class="event-description">Mentored engineering students in crafting compelling national-level hackathon presentations. Focused on storytelling, slide design, and effective communication of technical concepts.</p>
+                        
+                        <div class="event-highlights">
+                            <h4>Key Highlights</h4>
+                            <ul>
+                                <li>Presentation skills training for hackathon participants</li>
+                                <li>Slide design and storytelling techniques</li>
+                                <li>Technical communication and pitch development</li>
+                                <li>One-on-one mentoring sessions with students</li>
+                                <li>Success stories from mentored teams advancing to finals</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="event-stats">
+                            <div class="event-stat">
+                                <span class="event-stat-value">100+</span>
+                                <span class="event-stat-label">Students</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">Multiple</span>
+                                <span class="event-stat-label">Sessions</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">High</span>
+                                <span class="event-stat-label">Success Rate</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">3</span>
+                                <span class="event-stat-label">Mentors</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-image-gallery">
+                        <div class="event-gallery-item"><img src="assets/sec-guid-1.jpg" alt="SEC Guid 1" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/sec-guid-2.jpg" alt="SEC Guid 2" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/sec-guid-3.jpg" alt="SEC Guid 3" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/sec-guid-4.jpg" alt="SEC Guid 4" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/sec-guid-5.jpg" alt="SEC Guid 5" class="event-gallery-img"></div>
+                    </div>
+                </div>
+
+                <!-- Event 5: QUANTUM FORGE -->
+                <div class="event-card">
+                    <div class="event-info">
+                        <div class="event-badge">Hackathon & AI Workshop at Sathyabama Institute</div>
+                        <h3 class="event-title">QUANTUM FORGE</h3>
+                        <p class="event-description">A high-impact technical event at Sathyabama Institute combining hackathon strategy training and hands-on AI tool exposure. Focused on building real-world problem-solving skills and practical AI applications.</p>
+                        
+                        <div class="event-highlights">
+                            <h4>Key Highlights</h4>
+                            <ul>
+                                <li>Hackathon morning session: problem understanding and execution strategies</li>
+                                <li>Evening AI tools session with hands-on learning and real-time application</li>
+                                <li>Live team-based competition with prizes for top 3 teams</li>
+                                <li>Led by B. Deepak (Founder), Manikandan (Infosys), and Gauthaman (CTS)</li>
+                                <li>Coordinated with TechLora team for on-ground event management</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="event-stats">
+                            <div class="event-stat">
+                                <span class="event-stat-value">100+</span>
+                                <span class="event-stat-label">Students</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">1 Day</span>
+                                <span class="event-stat-label">Duration</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">2</span>
+                                <span class="event-stat-label">Sessions</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">3</span>
+                                <span class="event-stat-label">Trainers</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-image-gallery">
+                        <div class="event-gallery-item"><img src="assets/quantum-forge-1.jpg" alt="Quantum Forge 1" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/quantum-forge-2.jpg" alt="Quantum Forge 2" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/quantum-forge-3.jpg" alt="Quantum Forge 3" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/quantum-forge-4.jpg" alt="Quantum Forge 4" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="assets/quantum-forge-5.jpg" alt="Quantum Forge 5" class="event-gallery-img"></div>
+                    </div>
+                </div>
+
+                <!-- Event 6: PEC Guest Lecture -->
+                <div class="event-card">
+                    <div class="event-info">
+                        <div class="event-badge">Comprehensive Testing Workshop</div>
+                        <h3 class="event-title">PEC Guest Lecture</h3>
+                        <p class="event-description">An in-depth guest lecture delivered by B Deepak covering testing methodologies from fundamentals to advanced concepts. Students gained practical insights into User Requirement Documents (URD) and Agile testing practices.</p>
+                        
+                        <div class="event-highlights">
+                            <h4>Key Highlights</h4>
+                            <ul>
+                                <li>End-to-end testing methodology coverage</li>
+                                <li>Deep dive into User Requirement Documents (URD)</li>
+                                <li>Practical Agile testing techniques and best practices</li>
+                                <li>Real-world testing scenarios and case studies</li>
+                                <li>Interactive Q&A and hands-on demonstrations</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="event-stats">
+                            <div class="event-stat">
+                                <span class="event-stat-value">2 hrs</span>
+                                <span class="event-stat-label">Duration</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">URD + Agile</span>
+                                <span class="event-stat-label">Topics</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">High</span>
+                                <span class="event-stat-label">Engagement</span>
+                            </div>
+                            <div class="event-stat">
+                                <span class="event-stat-value">16+</span>
+                                <span class="event-stat-label">Trainers</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="event-image-gallery">
+                        <div class="event-gallery-item"><img src="images/main/m1.jpg" alt="PEC 1" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="images/main/m2.jpg" alt="PEC 2" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="images/main/m3.jpg" alt="PEC 3" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="images/main/m4.jpg" alt="PEC 4" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="images/main/m5.jpg" alt="PEC 5" class="event-gallery-img"></div>
+                        <div class="event-gallery-item"><img src="images/main/m6.jpg" alt="PEC 6" class="event-gallery-img"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our <span class="highlight">Services</span></h2>
+                <p class="section-subtitle" id="services-subtitle">Comprehensive IT training and guidance tailored for engineering excellence</p>
+            </div>
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <i data-lucide="book-open" class="service-icon"></i>
+                    </div>
+                    <h3>Workshops on All Domains</h3>
+                    <p>Expert training across AI, Python, Web Development, Cloud, and more</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <i data-lucide="briefcase" class="service-icon"></i>
+                    </div>
+                    <h3>Industry Relevant Training</h3>
+                    <p>Practical training aligned with current industry standards and demands</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <i data-lucide="award" class="service-icon"></i>
+                    </div>
+                    <h3>Certification Programs</h3>
+                    <p>Professional certification courses to boost your career prospects</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <i data-lucide="flask-conical" class="service-icon"></i>
+                    </div>
+                    <h3>Technical Training</h3>
+                    <p>Hands-on training in cutting-edge technologies and methodologies</p>
+                </div>
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <i data-lucide="presentation" class="service-icon"></i>
+                    </div>
+                    <h3>Hackathon Guidance</h3>
+                    <p>Expert mentorship for presentations, evaluations, and project success</p>
+                </div>
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <i data-lucide="graduation-cap" class="service-icon"></i>
+                    </div>
+                    <h3>Career Support</h3>
+                    <p>Comprehensive guidance for interview preparation and career planning</p>
+                </div>
+                <!-- Service 7 -->
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <i data-lucide="users" class="service-icon"></i>
+                    </div>
+                    <h3>Expert Mentorship</h3>
+                    <p>One-on-one mentoring from industry experts with years of experience</p>
+                </div>
+                <!-- Service 8 -->
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <i data-lucide="user-check" class="service-icon"></i>
+                    </div>
+                    <h3>Student Internships</h3>
+                    <p>Real-world internship opportunities to gain industry experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Student <span class="highlight">Testimonials</span></h2>
+                <p class="section-subtitle scrambled-text-line" id="testimonials-subtitle">Hear from students whose careers we've helped shape</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <i data-lucide="quote" class="quote-icon"></i>
+                    <blockquote>"The AI workshop by DOMINOVA was transformative! We built a functioning app in just 3 hours. The hands-on approach made complex concepts incredibly accessible."</blockquote>
+                    <div class="testimonial-author">
+                        <p class="author-name">Student</p>
+                        <p class="author-role">Engineering Student</p>
+                        <p class="author-inst">SIMATS Engineering College</p>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <i data-lucide="quote" class="quote-icon"></i>
+                    <blockquote>"B Deepak's testing lecture provided practical insights I've never encountered before. The URD and Agile methodologies are now core to my skill set."</blockquote>
+                    <div class="testimonial-author">
+                        <p class="author-name">Student</p>
+                        <p class="author-role">Final Year Student</p>
+                        <p class="author-inst">PEC</p>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <i data-lucide="quote" class="quote-icon"></i>
+                    <blockquote>"The hackathon evaluation team's feedback was invaluable. Their expertise helped us refine our project and think like professionals."</blockquote>
+                    <div class="testimonial-author">
+                        <p class="author-name">Student</p>
+                        <p class="author-role">Hackathon Participant</p>
+                        <p class="author-inst">Saveetha Engineering College</p>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card">
+                    <i data-lucide="quote" class="quote-icon"></i>
+                    <blockquote>"DOMINOVA's presentation guidance transformed how we pitch our ideas. We learned to tell compelling stories that resonate with judges and investors."</blockquote>
+                    <div class="testimonial-author">
+                        <p class="author-name">Student</p>
+                        <p class="author-role">Team Lead</p>
+                        <p class="author-inst">Saveetha Engineering College</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collaborate CTA Section -->
+    <section class="collaborate">
+        <div class="container">
+            <div class="collaborate-content">
+                <div class="collaborate-logo-container">
+                    <img src="assets/dominova-logo.png" alt="DOMINOVA" class="collaborate-logo">
+                </div>
+                <h2>Ready to <span class="highlight">Collaborate?</span></h2>
+                <p class="scrambled-text-line" id="collaborate-desc">Partner with DOMINOVA for workshops, guest lectures, hackathon evaluations, and internship guidance</p>
+                
+                <div class="contact-grid">
+                    <!-- Call -->
+                    <a href="tel:+918754325192" class="contact-card">
+                        <i data-lucide="phone" class="contact-icon"></i>
+                        <span class="contact-label">Call Us</span>
+                        <span class="contact-value">+91 87543 25192</span>
+                    </a>
+                    
+                    <!-- Email -->
+                    <a href="mailto:dominova.office@gmail.com" class="contact-card">
+                        <i data-lucide="mail" class="contact-icon"></i>
+                        <span class="contact-label">Email Us</span>
+                        <span class="contact-value">dominova.office@gmail.com</span>
+                    </a>
+                    
+                    <!-- Website -->
+                    <a href="https://dominova.tech" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <i data-lucide="globe" class="contact-icon"></i>
+                        <span class="contact-label">Visit Website</span>
+                        <span class="contact-value">dominova.tech</span>
+                    </a>
+                    
+                    <!-- Instagram -->
+                    <a href="https://instagram.com/dominova_chennai_" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <i data-lucide="instagram" class="contact-icon"></i>
+                        <span class="contact-label">Follow Us</span>
+                        <span class="contact-value">@dominova_chennai_</span>
+                    </a>
+                </div>
+                
+                <div class="cta-actions">
+                    <button class="btn btn-primary btn-lg" onclick="window.location.href='mailto:dominova.office@gmail.com'">
+                        Get In Touch
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-info">
+                    <img src="assets/dominova-logo.png" alt="DOMINOVA Logo" class="footer-logo">
+                    <div class="footer-text">
+                        <p class="footer-brand">DOMINOVA</p>
+                        <p class="footer-subtitle">MSME Registered IT Startup</p>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2025 DOMINOVA. All rights reserved.</p>
+                    <p class="footer-founder">Founder: B Deepak | +91 87543 25192</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="image-lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="Enlarged Event Image">
+        <div id="lightbox-caption"></div>
+    </div>
+
+    <!-- Script -->
+    <script src="main.js?v=1.0.2"></script>
+</body>
+</html>
