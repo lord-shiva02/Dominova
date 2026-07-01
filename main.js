@@ -1810,7 +1810,118 @@ class GradientBlinds {
 }
 
 // --- DOM Initialization ---
+
+// --- EventShowcase Component Class (Premium Gallery) ---
+class EventShowcase {
+    constructor(element) {
+        this.container = element;
+        this.track = element.querySelector('.showcase-track');
+        this.images = Array.from(element.querySelectorAll('.showcase-img'));
+        this.thumbnails = Array.from(element.querySelectorAll('.showcase-thumb'));
+        this.prevBtn = element.querySelector('.prev-btn');
+        this.nextBtn = element.querySelector('.next-btn');
+        
+        this.currentIndex = 0;
+        this.interval = null;
+        this.touchStartX = 0;
+        this.touchEndX = 0;
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.track || this.images.length === 0) return;
+        
+        // Setup initial state
+        this.updateActive();
+        
+        // Event Listeners
+        if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prev(true));
+        if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.next(true));
+        
+        this.thumbnails.forEach((thumb, index) => {
+            thumb.addEventListener('click', () => this.goTo(index, true));
+        });
+        
+        // Touch events for swipe
+        this.track.addEventListener('touchstart', (e) => {
+            this.touchStartX = e.changedTouches[0].screenX;
+            this.pauseAutoPlay();
+        }, { passive: true });
+        
+        this.track.addEventListener('touchend', (e) => {
+            this.touchEndX = e.changedTouches[0].screenX;
+            this.handleSwipe();
+            this.resumeAutoPlay();
+        });
+
+        // Mouse events to pause autoplay
+        this.container.addEventListener('mouseenter', () => this.pauseAutoPlay());
+        this.container.addEventListener('mouseleave', () => this.resumeAutoPlay());
+        
+        this.startAutoPlay();
+    }
+    
+    updateActive() {
+        this.images.forEach((img, i) => {
+            if (i === this.currentIndex) {
+                img.classList.add('active');
+            } else {
+                img.classList.remove('active');
+            }
+        });
+        
+        this.thumbnails.forEach((thumb, i) => {
+            if (i === this.currentIndex) {
+                thumb.classList.add('active');
+                // Scroll thumbnail into view
+                thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            } else {
+                thumb.classList.remove('active');
+            }
+        });
+    }
+    
+    goTo(index, manual = false) {
+        if (manual) this.pauseAutoPlay();
+        this.currentIndex = (index + this.images.length) % this.images.length;
+        this.updateActive();
+        if (manual) this.resumeAutoPlay();
+    }
+    
+    next(manual = false) {
+        this.goTo(this.currentIndex + 1, manual);
+    }
+    
+    prev(manual = false) {
+        this.goTo(this.currentIndex - 1, manual);
+    }
+    
+    handleSwipe() {
+        const threshold = 50;
+        if (this.touchEndX < this.touchStartX - threshold) {
+            this.next(true);
+        } else if (this.touchEndX > this.touchStartX + threshold) {
+            this.prev(true);
+        }
+    }
+    
+    startAutoPlay() {
+        this.interval = setInterval(() => this.next(), 4000);
+    }
+    
+    pauseAutoPlay() {
+        if (this.interval) clearInterval(this.interval);
+    }
+    
+    resumeAutoPlay() {
+        this.pauseAutoPlay();
+        this.startAutoPlay();
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+
     // Initialize Gradient Blinds Background
     const blindsEl = document.getElementById("blinds-background");
     if (blindsEl) {
@@ -2011,6 +2122,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // "Explore Our Work" Smooth Scroll
+    
+    // Initialize EventShowcases
+    document.querySelectorAll('.event-image-showcase').forEach(el => {
+        new EventShowcase(el);
+    });
+
     const exploreBtn = document.getElementById("explore-btn");
     const eventsSection = document.getElementById("events-section");
     if (exploreBtn && eventsSection) {
@@ -2019,26 +2136,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Event Galleries Thumbnail Switcher (for non-interactive standard event galleries, e.g. event 4, 5, 6)
-    const galleries = document.querySelectorAll(".event-gallery");
-    galleries.forEach((gallery) => {
-        const mainImage = gallery.querySelector(".main-image");
-        const thumbs = gallery.querySelectorAll(".thumb");
 
-        thumbs.forEach((thumb) => {
-            thumb.addEventListener("click", () => {
-                // Update active state
-                gallery.querySelectorAll(".thumb").forEach((t) => t.classList.remove("active"));
-                thumb.classList.add("active");
-
-                // Update main image source and alt
-                if (mainImage) {
-                    mainImage.src = thumb.src;
-                    mainImage.alt = thumb.alt;
-                }
-            });
-        });
-    });
 
     // Scroll Animation Observer (Premium Micro-interactions)
     const observerOptions = {
@@ -2098,19 +2196,47 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     document.head.appendChild(style);
 
+
     // --- Image Lightbox Modal ---
     const lightbox = document.getElementById("image-lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
     const lightboxCaption = document.getElementById("lightbox-caption");
     const lightboxClose = document.querySelector(".lightbox-close");
+    const lightboxPrevBtn = document.querySelector("#image-lightbox .prev-btn");
+    const lightboxNextBtn = document.querySelector("#image-lightbox .next-btn");
+
+    let currentLightboxGallery = [];
+    let currentLightboxIndex = 0;
 
     if (lightbox && lightboxImg) {
-        const openLightbox = (src, altText = "") => {
+        const openLightbox = (src, altText = "", gallery = null, index = 0) => {
             lightboxImg.src = src;
             lightboxCaption.textContent = altText;
+            currentLightboxGallery = gallery;
+            currentLightboxIndex = index;
+            
+            // Show/hide navigation arrows based on if it's a gallery
+            if (lightboxPrevBtn) lightboxPrevBtn.style.display = (gallery && gallery.length > 1) ? 'flex' : 'none';
+            if (lightboxNextBtn) lightboxNextBtn.style.display = (gallery && gallery.length > 1) ? 'flex' : 'none';
+
             lightbox.classList.add("show");
             document.body.style.overflow = "hidden"; // Disable background scrolling
         };
+        
+        const navigateLightbox = (direction) => {
+            if (!currentLightboxGallery || currentLightboxGallery.length === 0) return;
+            currentLightboxIndex = (currentLightboxIndex + direction + currentLightboxGallery.length) % currentLightboxGallery.length;
+            const item = currentLightboxGallery[currentLightboxIndex];
+            
+            // Add a small fade effect
+            lightboxImg.style.opacity = '0';
+            setTimeout(() => {
+                lightboxImg.src = item.src;
+                lightboxCaption.textContent = item.alt;
+                lightboxImg.style.opacity = '1';
+            }, 150);
+        };
+
 
         const closeLightbox = () => {
             lightbox.classList.remove("show");
@@ -2136,12 +2262,26 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+
         // Intercept clicks on images across the whole website
         document.body.addEventListener("click", (e) => {
             if (!e.target || typeof e.target.closest !== "function") return;
 
             if (e.target.closest('#image-lightbox')) return;
             if (e.target.closest('.lightbox-close')) return;
+            
+            // Check if clicked on a showcase image
+            if (e.target.classList.contains("showcase-img")) {
+                const track = e.target.closest('.showcase-track');
+                if (track) {
+                    const allImgs = Array.from(track.querySelectorAll('.showcase-img'));
+                    const galleryData = allImgs.map(img => ({ src: img.src, alt: img.alt }));
+                    const index = allImgs.indexOf(e.target);
+                    openLightbox(e.target.src, e.target.alt || "Event Image", galleryData, index);
+                }
+                return;
+            }
+
 
             // Check if clicked on DecayCard svg image
             const decayCardMain = e.target.closest(".decay-card-main");
