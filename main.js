@@ -1811,10 +1811,11 @@ class GradientBlinds {
 
 // --- DOM Initialization ---
 
-// --- EventShowcase Component Class (Premium Gallery) ---
+// --- EventShowcase Component Class (Premium Gallery with React Bits / GSAP Effects) ---
 class EventShowcase {
     constructor(element) {
         this.container = element;
+        this.mainBox = element.querySelector('.showcase-main');
         this.track = element.querySelector('.showcase-track');
         this.images = Array.from(element.querySelectorAll('.showcase-img'));
         this.thumbnails = Array.from(element.querySelectorAll('.showcase-thumb'));
@@ -1825,6 +1826,7 @@ class EventShowcase {
         this.interval = null;
         this.touchStartX = 0;
         this.touchEndX = 0;
+        this.isAnimating = false;
         
         this.init();
     }
@@ -1832,18 +1834,43 @@ class EventShowcase {
     init() {
         if (!this.track || this.images.length === 0) return;
         
-        // Setup initial state
-        this.updateActive();
+        // Initial setup for images (hide all but first)
+        gsap.set(this.images, { opacity: 0, scale: 1.1, zIndex: 1 });
+        gsap.set(this.images[0], { opacity: 1, scale: 1, zIndex: 2 });
+        this.images[0].classList.add('active');
+        this.thumbnails[0].classList.add('active');
         
-        // Event Listeners
+        // Tilt Hover Effect (React Bits Style)
+        this.mainBox.addEventListener("mousemove", (e) => this.handleTilt(e));
+        this.mainBox.addEventListener("mouseleave", () => this.resetTilt());
+        this.mainBox.addEventListener("mouseenter", () => {
+            gsap.to(this.images[this.currentIndex], { scale: 1.05, duration: 0.5, ease: "power2.out" });
+            this.pauseAutoPlay();
+        });
+        this.mainBox.addEventListener("mouseleave", () => {
+            gsap.to(this.images[this.currentIndex], { scale: 1, duration: 0.5, ease: "power2.out" });
+            this.resumeAutoPlay();
+        });
+
+        // Event Listeners for Nav
         if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prev(true));
         if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.next(true));
         
         this.thumbnails.forEach((thumb, index) => {
+            // Subtle floating hover effect for thumbnails
+            thumb.addEventListener("mouseenter", () => {
+                gsap.to(thumb, { y: -5, scale: 1.05, duration: 0.3, ease: "back.out(1.7)", boxShadow: "0 4px 15px rgba(251, 208, 81, 0.3)" });
+            });
+            thumb.addEventListener("mouseleave", () => {
+                if (!thumb.classList.contains('active')) {
+                    gsap.to(thumb, { y: 0, scale: 1, duration: 0.3, ease: "power2.out", boxShadow: "none" });
+                }
+            });
+            
             thumb.addEventListener('click', () => this.goTo(index, true));
         });
         
-        // Touch events for swipe
+        // Touch swipe
         this.track.addEventListener('touchstart', (e) => {
             this.touchStartX = e.changedTouches[0].screenX;
             this.pauseAutoPlay();
@@ -1855,38 +1882,86 @@ class EventShowcase {
             this.resumeAutoPlay();
         });
 
-        // Mouse events to pause autoplay
-        this.container.addEventListener('mouseenter', () => this.pauseAutoPlay());
-        this.container.addEventListener('mouseleave', () => this.resumeAutoPlay());
-        
         this.startAutoPlay();
     }
-    
-    updateActive() {
-        this.images.forEach((img, i) => {
-            if (i === this.currentIndex) {
-                img.classList.add('active');
-            } else {
-                img.classList.remove('active');
-            }
-        });
+
+    handleTilt(e) {
+        if (!this.mainBox) return;
+        const rect = this.mainBox.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
         
-        this.thumbnails.forEach((thumb, i) => {
-            if (i === this.currentIndex) {
-                thumb.classList.add('active');
-                // Scroll thumbnail into view
-                thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            } else {
-                thumb.classList.remove('active');
-            }
+        const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg
+        const rotateY = ((x - centerX) / centerX) * 10;
+        
+        gsap.to(this.mainBox, {
+            rotateX: rotateX,
+            rotateY: rotateY,
+            transformPerspective: 1000,
+            ease: "power1.out",
+            duration: 0.4
+        });
+    }
+
+    resetTilt() {
+        gsap.to(this.mainBox, {
+            rotateX: 0,
+            rotateY: 0,
+            ease: "power3.out",
+            duration: 0.7
         });
     }
     
     goTo(index, manual = false) {
+        if (this.isAnimating || index === this.currentIndex) return;
+        this.isAnimating = true;
         if (manual) this.pauseAutoPlay();
+
+        const prevIndex = this.currentIndex;
         this.currentIndex = (index + this.images.length) % this.images.length;
-        this.updateActive();
-        if (manual) this.resumeAutoPlay();
+        
+        const currentImg = this.images[prevIndex];
+        const nextImg = this.images[this.currentIndex];
+
+        // Reset Z-Index
+        gsap.set(this.images, { zIndex: 1 });
+        gsap.set(currentImg, { zIndex: 2 });
+        gsap.set(nextImg, { zIndex: 3 });
+
+        // Update classes
+        currentImg.classList.remove('active');
+        nextImg.classList.add('active');
+
+        // GSAP Premium Reveal Animation
+        const tl = gsap.timeline({
+            onComplete: () => {
+                this.isAnimating = false;
+                if (manual) this.resumeAutoPlay();
+            }
+        });
+
+        // Fade out current slightly
+        tl.to(currentImg, { opacity: 0.5, scale: 0.95, duration: 0.6, ease: "power2.inOut" }, 0);
+        
+        // Reveal next with floating scale and fade
+        tl.fromTo(nextImg, 
+            { opacity: 0, scale: 1.1, x: 20 },
+            { opacity: 1, scale: 1, x: 0, duration: 0.8, ease: "power3.out" },
+            0.1
+        );
+
+        // Update thumbnails with GSAP
+        this.thumbnails.forEach((thumb, i) => {
+            if (i === this.currentIndex) {
+                thumb.classList.add('active');
+                gsap.to(thumb, { y: -5, scale: 1.05, duration: 0.3, ease: "back.out(1.7)", borderColor: "var(--primary)" });
+            } else {
+                thumb.classList.remove('active');
+                gsap.to(thumb, { y: 0, scale: 1, duration: 0.3, ease: "power2.out", borderColor: "transparent", boxShadow: "none" });
+            }
+        });
     }
     
     next(manual = false) {
