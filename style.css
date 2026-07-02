@@ -107,6 +107,7 @@ a {
 .highlight {
     color: var(--primary);
     background: linear-gradient(135deg, var(--primary), #ffe89e);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -1312,9 +1313,6 @@ footer {
     }
     .lightbox-btn.prev-btn { left: 10px; }
     .lightbox-btn.next-btn { right: 10px; }
-}
-    color: var(--primary);
-    transform: scale(1.1);
 }
 
 #lightbox-caption {
