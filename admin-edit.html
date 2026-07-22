@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOMINOVA Admin - CMS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': '#FFFFFF',
+            'bg-secondary': '#FAF8F3',
+            'bg-dark-accent': '#0B0E1A',
+            'gold-primary': '#C9A227',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .input-field {
+      width: 100%;
+      border: 1px solid #E5E7EB;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+    }
+    .input-field:focus {
+      outline: none;
+      border-color: #C9A227;
+      box-shadow: 0 0 0 1px #C9A227;
+    }
+    .label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.5rem;
+    }
+    .tab-active {
+      border-bottom: 2px solid #C9A227;
+      color: #C9A227;
+    }
+    .tab-inactive {
+      color: #6B7280;
+    }
+    .tab-inactive:hover {
+      color: #374151;
+    }
+  </style>
+</head>
+<body class="bg-bg-secondary text-gray-900 font-sans antialiased pb-20">
+
+  <header class="bg-bg-dark-accent text-white shadow-md mb-8">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="text-xl font-display font-bold">
+        DOMI<span class="text-gold-primary">NOVA</span> CMS
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="index.html" target="_blank" class="text-sm font-semibold hover:text-gold-primary transition-colors">View Site ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Tabs -->
+    <div class="flex border-b border-gray-200 mb-8 space-x-8">
+      <button id="tab-settings" class="pb-4 font-semibold text-sm tab-active" onclick="switchTab('settings')">Site Settings</button>
+      <button id="tab-events" class="pb-4 font-semibold text-sm tab-inactive" onclick="switchTab('events')">Manage Events</button>
+    </div>
+
+    <!-- SITE SETTINGS SECTION -->
+    <section id="section-settings" class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 space-y-8">
+      <h2 class="text-2xl font-display font-bold mb-6">Hero & Global Settings</h2>
+      <form id="settings-form" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="md:col-span-2">
+            <label class="label">Hero Title (HTML allowed)</label>
+            <input type="text" id="set-heroTitle" class="input-field" required>
+          </div>
+          <div class="md:col-span-2">
+            <label class="label">Hero Subtitle</label>
+            <textarea id="set-heroSubtitle" rows="2" class="input-field" required></textarea>
+          </div>
+          <div class="md:col-span-2">
+            <label class="label">Hero Button Text</label>
+            <input type="text" id="set-heroButtonText" class="input-field" required>
+          </div>
+        </div>
+        
+        <hr class="border-gray-100 mb-6 mt-6">
+        <h3 class="font-display font-bold text-lg mb-4">Contact Information</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div>
+            <label class="label">Official Email</label>
+            <input type="email" id="set-contactEmail" class="input-field" placeholder="e.g. hello@dominova.com">
+          </div>
+          <div>
+            <label class="label">Business Phone</label>
+            <input type="tel" id="set-contactPhone" class="input-field" placeholder="e.g. +919876543210">
+          </div>
+          <div>
+            <label class="label">WhatsApp Number</label>
+            <input type="tel" id="set-contactWhatsapp" class="input-field" placeholder="e.g. 919876543210">
+          </div>
+        </div>
+
+        <hr class="border-gray-100">
+        <h3 class="font-display font-bold text-lg mb-4">Hero Stat Blocks</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <input type="text" id="set-s1-val" placeholder="Value (e.g. 1200+)" class="w-full font-bold text-lg bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none mb-2 text-center">
+            <input type="text" id="set-s1-lbl" placeholder="Label" class="w-full text-sm bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none text-center">
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <input type="text" id="set-s2-val" placeholder="Value" class="w-full font-bold text-lg bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none mb-2 text-center">
+            <input type="text" id="set-s2-lbl" placeholder="Label" class="w-full text-sm bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none text-center">
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <input type="text" id="set-s3-val" placeholder="Value" class="w-full font-bold text-lg bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none mb-2 text-center">
+            <input type="text" id="set-s3-lbl" placeholder="Label" class="w-full text-sm bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none text-center">
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <input type="text" id="set-s4-val" placeholder="Value" class="w-full font-bold text-lg bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none mb-2 text-center">
+            <input type="text" id="set-s4-lbl" placeholder="Label" class="w-full text-sm bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none text-center">
+          </div>
+        </div>
+
+        <div class="flex justify-end pt-4 border-t border-gray-100">
+          <button type="submit" class="bg-bg-dark-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-black shadow-lg">Save Settings</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- EVENTS LIST SECTION -->
+    <section id="section-events-list" class="hidden">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-display font-bold">Events</h2>
+        <button onclick="showEventForm()" class="bg-gold-primary text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#9C7A1A] transition-colors shadow-lg">
+          + Add New Event
+        </button>
+      </div>
+      
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-gray-50 border-b border-gray-100 text-sm uppercase tracking-wider text-text-secondary">
+              <th class="p-4 font-semibold">Title</th>
+              <th class="p-4 font-semibold">Category</th>
+              <th class="p-4 font-semibold">Order</th>
+              <th class="p-4 font-semibold text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="events-table-body" class="divide-y divide-gray-100">
+            <!-- Injected by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- EVENT FORM SECTION -->
+    <section id="section-event-form" class="hidden bg-white rounded-xl shadow-sm border border-gray-100 p-8 space-y-8">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-display font-bold" id="event-form-title">Create Event</h2>
+        <button onclick="hideEventForm()" class="text-gray-500 hover:text-gray-800">← Back to List</button>
+      </div>
+
+      <form id="event-form" class="space-y-6">
+        <input type="hidden" id="f-id">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="md:col-span-2">
+            <label class="label">Event Title</label>
+            <input type="text" id="f-title" required class="input-field" placeholder="e.g. NEXORA 2K25">
+          </div>
+          <div>
+            <label class="label">Category (Eyebrow Label)</label>
+            <input type="text" id="f-category" required class="input-field" placeholder="e.g. AI & Python Workshop">
+          </div>
+          <div>
+            <label class="label">Display Order</label>
+            <input type="number" id="f-order" value="0" class="input-field">
+          </div>
+          <div class="md:col-span-2">
+            <label class="label">Description</label>
+            <textarea id="f-description" required rows="3" class="input-field"></textarea>
+          </div>
+        </div>
+
+        <hr class="border-gray-100">
+
+        <!-- Stats Grid -->
+        <div>
+          <h3 class="font-display font-bold text-lg mb-4">Stat Blocks (Max 4)</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <input type="text" id="s1-val" placeholder="Value (e.g. 800+)" class="w-full font-bold text-lg bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none mb-2 text-center">
+              <input type="text" id="s1-lbl" placeholder="Label" class="w-full text-sm bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none text-center">
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <input type="text" id="s2-val" placeholder="Value" class="w-full font-bold text-lg bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none mb-2 text-center">
+              <input type="text" id="s2-lbl" placeholder="Label" class="w-full text-sm bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none text-center">
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <input type="text" id="s3-val" placeholder="Value" class="w-full font-bold text-lg bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none mb-2 text-center">
+              <input type="text" id="s3-lbl" placeholder="Label" class="w-full text-sm bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none text-center">
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <input type="text" id="s4-val" placeholder="Value" class="w-full font-bold text-lg bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none mb-2 text-center">
+              <input type="text" id="s4-lbl" placeholder="Label" class="w-full text-sm bg-transparent border-b border-gray-300 focus:border-gold-primary focus:outline-none text-center">
+            </div>
+          </div>
+        </div>
+
+        <hr class="border-gray-100">
+
+        <div>
+          <h3 class="font-display font-bold text-lg mb-4">Highlights (Bullet Points)</h3>
+          <textarea id="f-highlights" rows="5" class="input-field" placeholder="Enter one highlight per line..."></textarea>
+        </div>
+
+        <hr class="border-gray-100">
+
+        <!-- Image Upload -->
+        <div>
+          <h3 class="font-display font-bold text-lg mb-2">Images (Max 10)</h3>
+          <p class="text-xs text-gray-500 mb-4">Select images (they will be saved in LocalStorage). Max 5MB total.</p>
+          
+          <input type="file" id="f-images" multiple accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gold-primary file:text-white hover:file:bg-[#9C7A1A] mb-4">
+          
+          <div id="image-preview" class="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <!-- Thumbnails injected here -->
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <input type="checkbox" id="f-published" class="w-5 h-5 text-gold-primary border-gray-300 rounded focus:ring-gold-primary" checked>
+          <label class="ml-3 font-medium text-gray-700">Publish this event</label>
+        </div>
+
+        <div class="flex justify-end pt-4 border-t border-gray-100 space-x-4">
+          <button type="button" onclick="hideEventForm()" class="px-6 py-3 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50">Cancel</button>
+          <button type="submit" id="save-btn" class="bg-bg-dark-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-black shadow-lg">Save Event</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <script src="cms-data.js"></script>
+  <script>
+    let existingImages = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSettingsForm();
+      renderEventsList();
+    });
+
+    // --- TAB SWITCHING ---
+    function switchTab(tab) {
+      document.getElementById('tab-settings').className = tab === 'settings' ? 'pb-4 font-semibold text-sm tab-active' : 'pb-4 font-semibold text-sm tab-inactive';
+      document.getElementById('tab-events').className = tab === 'events' ? 'pb-4 font-semibold text-sm tab-active' : 'pb-4 font-semibold text-sm tab-inactive';
+      
+      if (tab === 'settings') {
+        document.getElementById('section-settings').classList.remove('hidden');
+        document.getElementById('section-events-list').classList.add('hidden');
+        hideEventForm();
+      } else {
+        document.getElementById('section-settings').classList.add('hidden');
+        document.getElementById('section-events-list').classList.remove('hidden');
+      }
+    }
+
+    // --- SETTINGS FORM ---
+    function loadSettingsForm() {
+      const s = getSettings();
+      document.getElementById('set-heroTitle').value = s.heroTitle || '';
+      document.getElementById('set-heroSubtitle').value = s.heroSubtitle || '';
+      document.getElementById('set-heroButtonText').value = s.heroButtonText || '';
+      
+      document.getElementById('set-contactEmail').value = s.contactEmail || '';
+      document.getElementById('set-contactPhone').value = s.contactPhone || '';
+      document.getElementById('set-contactWhatsapp').value = s.contactWhatsapp || '';
+      
+      document.getElementById('set-s1-val').value = s.stat1Value || '';
+      document.getElementById('set-s1-lbl').value = s.stat1Label || '';
+      document.getElementById('set-s2-val').value = s.stat2Value || '';
+      document.getElementById('set-s2-lbl').value = s.stat2Label || '';
+      document.getElementById('set-s3-val').value = s.stat3Value || '';
+      document.getElementById('set-s3-lbl').value = s.stat3Label || '';
+      document.getElementById('set-s4-val').value = s.stat4Value || '';
+      document.getElementById('set-s4-lbl').value = s.stat4Label || '';
+    }
+
+    document.getElementById('settings-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const s = getSettings();
+      s.heroTitle = document.getElementById('set-heroTitle').value;
+      s.heroSubtitle = document.getElementById('set-heroSubtitle').value;
+      s.heroButtonText = document.getElementById('set-heroButtonText').value;
+      
+      s.contactEmail = document.getElementById('set-contactEmail').value;
+      s.contactPhone = document.getElementById('set-contactPhone').value;
+      s.contactWhatsapp = document.getElementById('set-contactWhatsapp').value;
+
+      s.stat1Value = document.getElementById('set-s1-val').value;
+      s.stat1Label = document.getElementById('set-s1-lbl').value;
+      s.stat2Value = document.getElementById('set-s2-val').value;
+      s.stat2Label = document.getElementById('set-s2-lbl').value;
+      s.stat3Value = document.getElementById('set-s3-val').value;
+      s.stat3Label = document.getElementById('set-s3-lbl').value;
+      s.stat4Value = document.getElementById('set-s4-val').value;
+      s.stat4Label = document.getElementById('set-s4-lbl').value;
+
+      saveSettings(s);
+      alert('Settings saved successfully! Refresh the main site to see changes.');
+    });
+
+    // --- EVENTS LIST ---
+    function renderEventsList() {
+      const events = getEvents().sort((a,b) => (a.display_order || 0) - (b.display_order || 0));
+      const tbody = document.getElementById('events-table-body');
+      if (events.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="p-8 text-center text-text-secondary">No events found. Click "Add New Event".</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = events.map(e => `
+        <tr class="hover:bg-gray-50 transition-colors">
+          <td class="p-4 font-semibold">${e.title}</td>
+          <td class="p-4 text-sm text-text-secondary">${e.category}</td>
+          <td class="p-4 text-sm">${e.display_order || 0}</td>
+          <td class="p-4 text-right space-x-3">
+            <button onclick="editEvent('${e.id}')" class="text-blue-600 hover:text-blue-800 font-medium text-sm">Edit</button>
+            <button onclick="deleteEvent('${e.id}')" class="text-red-600 hover:text-red-800 font-medium text-sm">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // --- EVENT FORM ---
+    function showEventForm(eventId = null) {
+      document.getElementById('section-events-list').classList.add('hidden');
+      document.getElementById('section-event-form').classList.remove('hidden');
+      document.getElementById('event-form').reset();
+      existingImages = [];
+      document.getElementById('image-preview').innerHTML = '';
+      document.getElementById('f-id').value = '';
+
+      if (eventId) {
+        document.getElementById('event-form-title').textContent = 'Edit Event';
+        const ev = getEvents().find(e => e.id === eventId);
+        if (ev) {
+          document.getElementById('f-id').value = ev.id;
+          document.getElementById('f-title').value = ev.title || '';
+          document.getElementById('f-category').value = ev.category || '';
+          document.getElementById('f-order').value = ev.display_order || 0;
+          document.getElementById('f-description').value = ev.description || '';
+          document.getElementById('f-published').checked = ev.is_published !== false;
+          
+          document.getElementById('s1-val').value = ev.stat_1_value || '';
+          document.getElementById('s1-lbl').value = ev.stat_1_label || '';
+          document.getElementById('s2-val').value = ev.stat_2_value || '';
+          document.getElementById('s2-lbl').value = ev.stat_2_label || '';
+          document.getElementById('s3-val').value = ev.stat_3_value || '';
+          document.getElementById('s3-lbl').value = ev.stat_3_label || '';
+          document.getElementById('s4-val').value = ev.stat_4_value || '';
+          document.getElementById('s4-lbl').value = ev.stat_4_label || '';
+
+          document.getElementById('f-highlights').value = (ev.highlights || []).join('\n');
+          
+          existingImages = ev.images || [];
+          renderImages();
+        }
+      } else {
+        document.getElementById('event-form-title').textContent = 'Create Event';
+      }
+    }
+
+    function hideEventForm() {
+      document.getElementById('section-event-form').classList.add('hidden');
+      document.getElementById('section-events-list').classList.remove('hidden');
+      renderEventsList();
+    }
+
+    function renderImages() {
+      const container = document.getElementById('image-preview');
+      container.innerHTML = existingImages.map((url, index) => `
+        <div class="relative group aspect-video bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
+          <img src="${url}" class="w-full h-full object-cover">
+          <button type="button" onclick="removeImage(${index})" class="absolute top-1 right-1 bg-red-500 text-white w-6 h-6 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">✕</button>
+        </div>
+      `).join('');
+    }
+
+    window.removeImage = function(index) {
+      existingImages.splice(index, 1);
+      renderImages();
+    }
+
+    // Convert file to Base64
+    const toBase64 = file => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+
+    document.getElementById('event-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const saveBtn = document.getElementById('save-btn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving...';
+
+      try {
+        const fileInput = document.getElementById('f-images');
+        const files = Array.from(fileInput.files);
+        
+        let newImages = [...existingImages];
+        for (const file of files) {
+          const base64 = await toBase64(file);
+          newImages.push(base64);
+        }
+
+        const id = document.getElementById('f-id').value || 'evt_' + Date.now();
+        const eventData = {
+          id,
+          title: document.getElementById('f-title').value,
+          category: document.getElementById('f-category').value,
+          description: document.getElementById('f-description').value,
+          display_order: parseInt(document.getElementById('f-order').value) || 0,
+          is_published: document.getElementById('f-published').checked,
+          highlights: document.getElementById('f-highlights').value.split('\n').map(l => l.trim()).filter(Boolean),
+          images: newImages,
+          stat_1_value: document.getElementById('s1-val').value,
+          stat_1_label: document.getElementById('s1-lbl').value,
+          stat_2_value: document.getElementById('s2-val').value,
+          stat_2_label: document.getElementById('s2-lbl').value,
+          stat_3_value: document.getElementById('s3-val').value,
+          stat_3_label: document.getElementById('s3-lbl').value,
+          stat_4_value: document.getElementById('s4-val').value,
+          stat_4_label: document.getElementById('s4-lbl').value,
+        };
+
+        let events = getEvents();
+        const index = events.findIndex(ev => ev.id === id);
+        if (index > -1) {
+          events[index] = eventData;
+        } else {
+          events.push(eventData);
+        }
+        
+        saveEvents(events);
+        alert('Event saved successfully!');
+        hideEventForm();
+      } catch (err) {
+        alert('Error saving: ' + err.message);
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Event';
+      }
+    });
+
+    window.editEvent = function(id) {
+      showEventForm(id);
+    };
+
+    window.deleteEvent = function(id) {
+      if (confirm('Delete this event?')) {
+        let events = getEvents();
+        events = events.filter(e => e.id !== id);
+        saveEvents(events);
+        renderEventsList();
+      }
+    };
+  </script>
+</body>
+</html>

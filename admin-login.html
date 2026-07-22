@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOMINOVA Admin - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': '#FFFFFF',
+            'bg-dark-accent': '#0B0E1A',
+            'gold-primary': '#C9A227',
+            'gold-deep': '#9C7A1A',
+            'text-primary': '#12141C',
+            'text-secondary': '#5B5E6B',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-bg-primary text-text-primary font-sans antialiased h-screen flex items-center justify-center">
+
+  <div class="bg-bg-dark-accent p-10 rounded-2xl shadow-2xl w-full max-w-md relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-gold-primary rounded-full blur-3xl opacity-20 transform translate-x-1/2 -translate-y-1/2"></div>
+    
+    <div class="relative z-10 text-center mb-8">
+      <div class="text-3xl font-display font-bold tracking-tighter text-white mb-2">
+        DOMI<span class="text-gold-primary">NOVA</span>
+      </div>
+      <p class="text-gold-primary/80 uppercase tracking-widest text-xs font-bold">Admin Portal</p>
+    </div>
+
+    <form id="login-form" class="relative z-10 space-y-6">
+      <div id="error-message" class="hidden bg-red-500/20 text-red-200 p-3 rounded text-sm text-center"></div>
+      
+      <div>
+        <label class="block text-sm font-semibold text-white/70 mb-2">Username</label>
+        <input type="text" id="email" required class="w-full bg-white/5 border border-white/10 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-gold-primary transition-colors">
+      </div>
+      
+      <div>
+        <label class="block text-sm font-semibold text-white/70 mb-2">Password</label>
+        <input type="password" id="password" required class="w-full bg-white/5 border border-white/10 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-gold-primary transition-colors">
+      </div>
+      
+      <button type="submit" id="submit-btn" class="w-full bg-gold-primary text-white font-bold rounded-lg px-4 py-3 hover:bg-gold-deep transition-colors flex items-center justify-center">
+        Sign In
+      </button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('login-form');
+      const errorDiv = document.getElementById('error-message');
+      const submitBtn = document.getElementById('submit-btn');
+
+      // Check if already logged in via our temp localStorage flag
+      if (localStorage.getItem('dominova_admin_logged_in') === 'true') {
+        window.location.href = 'admin-dashboard.html';
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        errorDiv.classList.add('hidden');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Signing In...';
+
+        const username = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Hardcoded temporary login
+        setTimeout(() => {
+          if (username === 'deepak' && password === 'deepak007') {
+            localStorage.setItem('dominova_admin_logged_in', 'true');
+            window.location.href = 'admin-dashboard.html';
+          } else {
+            errorDiv.textContent = 'Invalid username or password.';
+            errorDiv.classList.remove('hidden');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Sign In';
+          }
+        }, 500); // Small delay for effect
+      });
+    });
+  </script>
+</body>
+</html>
